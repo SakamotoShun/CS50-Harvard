@@ -33,7 +33,7 @@ from performing ACTIONS(*a*) in a STATE(*s*).
 - State Space
   : The state of all states reachable from the initial state by any
 sequence of actions.
-- Goal Test
+- Goal Tests
   : Way to determine whether a given state is a good state.
 - Path Cost
   : Numerical cost associated with a given path to get to goal state.
