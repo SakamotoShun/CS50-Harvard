@@ -18,7 +18,7 @@ Maze / Number finding / Driving Directions
 - Informed Search
   : Search strategy that uses problem specific knowledge to find solutions more efficiently.
   - [Greedy Best-First Search](#greedy-best-first-search)
-  - [A\* Search](<#a(star)-search>)
+  - [A(\*) Search](#a-star-search)
   - [Adverseral Search](#adverseral-search)
 
 ---
@@ -189,42 +189,49 @@ while True:
 
 ### Greedy-best-first search
 
-Search Algorithm that expands the node that is closest to the goal as estimated by a heuristic function. h(n)
+Search Algorithm that expands the node that is closest to
+the goal as estimated by a heuristic function. h(n)
 
 - Manhattan distance
-  : The distance between two points measured along axis at right angles. In a plane with $p_1$ at $(x_1,y_1)$ and $p_2$ at $(x_2,y_2)$, it is $|x_1-x_2|+|y_1-y_1|$
-  > When exploring GBFS, algorithm will choose which node to select at a fork based on a heuristic function that is lower.
+  : The distance between two points measured along axis at right angles.
+  In a plane with $p_1$ at $(x_1,y_1)$ and $p_2$ at $(x_2,y_2)$, it is $|x_1-x_2|+|y_1-y_1|$
+  > When exploring GBFS, algorithm will choose which node to select at a fork based
+  > on a heuristic function that is lower.
   > (Needs a good heuristic)
 
 ---
 
-### A(Star)-Search
+### A-Star-Search
 
 Search Algorithm that expands node with the lowest value of g(n) +h(n)
 
 - g(_n_): cost to reach node
 - h(_n_): estimated cost to reach goal (heuristic)
-  > g(n) + h(n) is the estimated travel cost from the initial state to goal state.
-  > The program will rather take fewer steps to be at a certain distance than take many steps to be about the same distance away from the goal.
+  > $g(n) + h(n)$ is the estimated travel cost from the initial state to goal state.
+  > The program will rather take fewer steps to be at a certain distance than
+  > take many steps to be about the same distance away from the goal.
   >
   > > A\* search is only optimal if;
       - h(n) never over estimates the true cost **AND**
-      - h(n) is consistant: For every node *n* and successor n` with steps cost *c*, h(*n*) <= h(*n*) +c
+      - h(n) is consistent: For every node n and successor n' with steps cost c,
+  $h(n) \leq h(n) + c$
   > h(n) needs to be either spot on or underestimate.
 
 ---
 
 ### Adverseral-Search
 
-Search Algorithm trying to win a game whereby there is an "opponent" trying to make it not win
+Search Algorithm trying to win a game,
+whereby there is an "opponent" trying to make it not win
 
 - _e.g._ Chess, Tic-Tac-Toe
 
 #### Minimax
 
-Assigning certain endstate witha a number, and each party tries to achieve the max/min score.
+Assigning certain endstate with a number,
+each party tries to achieve the max/min score.
 
-```
+```TicTacToe
     | o |         o | x | o       x |   |
 -------------   -------------   -------------
     | o |         o | x | x         | x |
@@ -233,12 +240,14 @@ Assigning certain endstate witha a number, and each party tries to achieve the m
      (-1)            (0)             (1)
 ```
 
-For the O player, trying to acheive the minimum score of -1, where he wins. If not possible, it would have to choose between 0 or 1. Since 0 is smaller, it would choose to end in a draw.
+For the O player, trying to acheive the minimum score of -1, where he wins.
+If not possible,it would have to choose between 0 or 1.
+Since 0 is smaller, it would choose to end in a draw.
 
 ##### Game
 
-- S<sub>0</sub>
-  : Inital State
+- $S_0$
+  : Initial State
 - PLAYERS(_s_)
   : return which player to move
 - ACTIONS(_s_)
@@ -249,9 +258,12 @@ For the O player, trying to acheive the minimum score of -1, where he wins. If n
   : check if state is terminal.
 - UTILITY(_s_)
   : final numerical value of terminal state.
-  > Recursive function wil be able to "look into the future" and assign each possible action with the score of the action.
+
+  > Recursive function wil be able to "look into the future"
+  > and assign each possible action with the score of the action.
   > If looking for max score, the function will find the end state with the max value.
-  > ![Minimax TicTacToe](img_Minimax_TicTacToe.png)
+
+- ![Minimax TicTacToe](img-Minimax-TicTacToe.png)
 
 ---
 
@@ -261,19 +273,17 @@ Given state of s
 : - MAX pick action _a_ in ACTIONS(_s_) that produces highest value of MIN-VALUE(RESULTS(_s,a_))
 : - MIN pick action _a_ in ACTIONS(_s_) that produces lowest value of MAX-VALUE(RESUTLS(_s,a_))
 
-```
-function MAX-VALUE(state):
-  if TERMINAL(state):
-    return UTILITY(state)
-  v = -∞ (negative infinity)
-
-  for action in ACTION(*s*):
-    value = MAX(value, MIN-VALUE(RESULTS(*s,a*)))
-  return value
-```
-
-> Optimisation for Minimax : Alpha Beta Pruning
+> function MAX-VALUE(state):
+> if TERMINAL(state):
+> return UTILITY(state)
+> v = - $\infty$ (negative infinity)
+> for action in ACTION(_s_):
+> value = MAX(value, MIN-VALUE(RESULTS(_s,a_)))
+> return value
 >
-> > When searching for terminal states, if a value is less/more than the previous action's state, then there is no nee to consider the other actions in that state.
+> > Optimisation for Minimax : Alpha Beta Pruning
+> >
+> > > When searching for terminal states, if a value is less/more than the previous
+> > > action's state,then there is no nee to consider the other actions in that state.
 
-- ![Alpha Beta Pruning](img_Alphabetapruning.png)
+- ![Alpha Beta Pruning](img-Alphabetapruning.png)
