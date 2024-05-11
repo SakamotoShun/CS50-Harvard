@@ -1,8 +1,8 @@
 ---
 id: CS50
-aliases: []
 tags:
   - Lectures
+  - Video
 ---
 
 # Search
@@ -263,7 +263,7 @@ Since 0 is smaller, it would choose to end in a draw.
   > and assign each possible action with the score of the action.
   > If looking for max score, the function will find the end state with the max value.
 
-- ![Minimax TicTacToe](img-Minimax-TicTacToe.png)
+![Minimax TicTacToe](img-Minimax-TicTacToe.png)
 
 ---
 
@@ -286,4 +286,4 @@ Given state of s
 > > > When searching for terminal states, if a value is less/more than the previous
 > > > action's state,then there is no nee to consider the other actions in that state.
 
-- ![Alpha Beta Pruning](img-Alphabetapruning.png)
+![Alpha Beta Pruning](img-Alphabetapruning.png)
