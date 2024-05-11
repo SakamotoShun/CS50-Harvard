@@ -232,9 +232,7 @@ For the O player, trying to acheive the minimum score of -1, where he wins. If n
   : final numerical value of terminal state.
 > Recursive function wil be able to "look into the future" and assign each possible action with the score of the action.
 > If looking for max score, the function will find the end state with the max value.
-- <img src="\Lecture 1\Images\Minimax_TicTacToe.png">
-- <img src="F:\Obsidian\Notes\CS50 Harvard\Lecture 1\Images\Minimax_TicTacToe.png">
-
+![Minimax TicTacToe](Minimax_TicTacToe.png)
 ___
 
 ###### Minimax Psuedocode
@@ -256,5 +254,4 @@ function MAX-VALUE(state):
 
 >Optimisation for Minimax : Alpha Beta Pruning
 >>When searching for terminal states, if a value is less/more than the previous action's state, then there is no nee to consider the other actions in that state.
-- <img src="\Lecture 1\Images\Alphabetapruning.png">
--  <img src="F:\Obsidian\Notes\CS50 Harvard\Lecture 1\Images\Alphabetapruning.png">
+- ![Alpha Beta Pruning](Alphabetapruning.png)
