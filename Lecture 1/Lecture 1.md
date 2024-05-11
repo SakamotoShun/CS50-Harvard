@@ -4,20 +4,25 @@ aliases: []
 tags:
   - Lectures
 ---
+
 # Search
 
 Maze / Number finding / Driving Directions
 
 ## Types of Search
+
 - Uniformed Search
   : Search Strategy that uses no problem specific knowledge
-    - [Depth First Search](#stack-frontier)  :: [[#Stack frontier]]
-    - [Breadth First Search](#queue-frontier) :: [[#Queue Frontier]]
+  - [Depth First Search](#stack-frontier)
+  - [Breadth First Search](#queue-frontier)
 - Informed Search
   : Search strategy that uses problem specific knowledge to find solutions more efficiently.
-    - [Greedy Best-First Search](#greedy-best-first-search) :: [[#Greedy best-first search]]
-    - [A* Search](#a(star)-search) :: [[#A(Star) Search]]
-___
+  - [Greedy Best-First Search](#greedy-best-first-search)
+  - [A\* Search](<#a(star)-search>)
+  - [Adverseral Search](#adverseral-search)
+
+---
+
 - Agents
   : entity that perceives its environment and acts upon that environment.
 - State
@@ -26,13 +31,13 @@ ___
   : The state where the agents begins.
 - Actions
   : choices made in a state.
-    - ACTIONS(*s*) returns the set of actions that can be executed in state(*s*).
+  - ACTIONS(_s_) returns the set of actions that can be executed in state(_s_).
 - Transition Model
-  : RESULTS(*s,a*) returns the state resulting
-from performing ACTIONS(*a*) in a STATE(*s*).
+  : RESULTS(_s,a_) returns the state resulting
+  from performing ACTIONS(_a_) in a STATE(_s_).
 - State Space
   : The state of all states reachable from the initial state by any
-sequence of actions.
+  sequence of actions.
 - Goal Tests
   : Way to determine whether a given state is a good state.
 - Path Cost
@@ -47,6 +52,7 @@ sequence of actions.
 - Path Cost functions
 
 - Node: A data structure that keeps track of;
+
   - State
   - Parent (Which node it came from)
   - An action (What action did it take to arrive in this mode)
@@ -58,13 +64,13 @@ sequence of actions.
 
 1. Start with a frontier that contains the initial state
 2. Repeat:
-    1. If frontier is empty --> No solution.
-    2. Remove a node from the frontier.
-    3. If node contains goal state, return solution.
-    4. Expand nodes, adding resulting node to the frontier if they have not
-       been explored
+   1. If frontier is empty --> No solution.
+   2. Remove a node from the frontier.
+   3. If node contains goal state, return solution.
+   4. Expand nodes, adding resulting node to the frontier if they have not
+      been explored
 
-___
+---
 
 - Stack: Last in first out data type
   - Explore the latest added node
@@ -75,9 +81,9 @@ ___
   - Breadth first search.
     - Will find the optimal path, but may cost more memory.
 
-___
+---
 
-### Stack frontier
+### Stack-frontier
 
 ```python
 class Node():
@@ -95,7 +101,7 @@ class Stackfrontier():
 
   def contains_state(self,state):
     return any(node.state == state for node in self.frontier)
-  
+
   def empty(self):
       return len(self.frontier) == 0
 
@@ -109,13 +115,13 @@ class Stackfrontier():
       return node
 ```
 
-___
+---
 
-### Queue Frontier
+### Queue-Frontier
 
 ```python
 class QueueFrontier(StackFrontier):
-  
+
   def remove(self):
     if self.empty():
       raise Exception("empty frontier")
@@ -125,9 +131,9 @@ class QueueFrontier(StackFrontier):
         return node
 ```
 
-___
+---
 
-### Solve function
+### Solve-function
 
 ```python
 # keep track of number of states explored
@@ -166,7 +172,7 @@ while True:
     cells.reverse()
     self.solution = (actions, cells)
     return
-  
+
   # Mark node as explored
   self.explored.add(node.state)
 
@@ -176,82 +182,98 @@ while True:
       child = Node(state=state, parent=node, action=action)
       frontier.add(child)
 ```
-___
+
+---
+
 ## Informed Search
-### Greedy best-first search
-Search Algorithm that expands the  node that is closest to the goal as estimated by a heuristic function. h(n)
+
+### Greedy-best-first search
+
+Search Algorithm that expands the node that is closest to the goal as estimated by a heuristic function. h(n)
+
 - Manhattan distance
-  : The distance between two points measured along axis at right angles. In a plane with p<sub>1</sub> at (x<sub>1</sub>,y<sub>1</sub>) and p<sub>2</sub> at (x<sub>2</sub>,y<sub>2</sub>), it is |x<sub>1</sub>-x<sub>2</sub>| + |y<sub>1</sub>-y<sub>2</sub>|
-> When exploring GBFS, algorithm will choose which node to select at a fork based on a heuristic function that is lower.
-   (Needs a good heuristic)
+  : The distance between two points measured along axis at right angles. In a plane with $p_1$ at $(x_1,y_1)$ and $p_2$ at $(x_2,y_2)$, it is $|x_1-x_2|+|y_1-y_1|$
+  > When exploring GBFS, algorithm will choose which node to select at a fork based on a heuristic function that is lower.
+  > (Needs a good heuristic)
 
-___
+---
 
-### A(Star) Search
+### A(Star)-Search
 
 Search Algorithm that expands node with the lowest value of g(n) +h(n)
-- g(*n*): cost to reach node
-- h(*n*): estimated cost to reach goal  (heuristic)
-> g(n) + h(n) is the estimated travel cost from the initial state to goal state.
- The program will rather take fewer steps to be at a certain distance than take many steps to be about the same distance away from the goal.
->> A* search is only optimal if;
-    - h(n) never over estimates the true cost **AND**
-    - h(n) is consistant: For every node *n* and successor n` with steps cost *c*, h(*n*) <= h(*n*) +c
+
+- g(_n_): cost to reach node
+- h(_n_): estimated cost to reach goal (heuristic)
+  > g(n) + h(n) is the estimated travel cost from the initial state to goal state.
+  > The program will rather take fewer steps to be at a certain distance than take many steps to be about the same distance away from the goal.
+  >
+  > > A\* search is only optimal if;
+      - h(n) never over estimates the true cost **AND**
+      - h(n) is consistant: For every node *n* and successor n` with steps cost *c*, h(*n*) <= h(*n*) +c
   > h(n) needs to be either spot on or underestimate.
-___
-### Adverserial Search
+
+---
+
+### Adverseral-Search
 
 Search Algorithm trying to win a game whereby there is an "opponent" trying to make it not win
-  - *e.g.* Chess, Tic-Tac-Toe
+
+- _e.g._ Chess, Tic-Tac-Toe
 
 #### Minimax
 
 Assigning certain endstate witha a number, and each party tries to achieve the max/min score.
-~~~
+
+```
     | o |         o | x | o       x |   |
 -------------   -------------   -------------
     | o |         o | x | x         | x |
 -------------   -------------   -------------
     | o |         x | o | x         |   | x
      (-1)            (0)             (1)
-~~~
+```
+
 For the O player, trying to acheive the minimum score of -1, where he wins. If not possible, it would have to choose between 0 or 1. Since 0 is smaller, it would choose to end in a draw.
-      
+
 ##### Game
+
 - S<sub>0</sub>
   : Inital State
-- PLAYERS(*s*)
+- PLAYERS(_s_)
   : return which player to move
-- ACTIONS(*s*)
+- ACTIONS(_s_)
   : return legal moves in a state
-- RESULTS(*s*)
+- RESULTS(_s_)
   : returns state after action.
-- TERMINAL(*s*)
+- TERMINAL(_s_)
   : check if state is terminal.
-- UTILITY(*s*)
+- UTILITY(_s_)
   : final numerical value of terminal state.
-> Recursive function wil be able to "look into the future" and assign each possible action with the score of the action.
-> If looking for max score, the function will find the end state with the max value.
-![Minimax TicTacToe](img_Minimax_TicTacToe.png)
-___
+  > Recursive function wil be able to "look into the future" and assign each possible action with the score of the action.
+  > If looking for max score, the function will find the end state with the max value.
+  > ![Minimax TicTacToe](img_Minimax_TicTacToe.png)
 
-###### Minimax Psuedocode
+---
+
+###### Minimax-Psuedocode
 
 Given state of s
- : - MAX pick action *a* in ACTIONS(*s*) that produces highest value of MIN-VALUE(RESULTS(*s,a*))
- : - MIN pick action *a* in ACTIONS(*s*) that produces lowest value of MAX-VALUE(RESUTLS(*s,a*))
+: - MAX pick action _a_ in ACTIONS(_s_) that produces highest value of MIN-VALUE(RESULTS(_s,a_))
+: - MIN pick action _a_ in ACTIONS(_s_) that produces lowest value of MAX-VALUE(RESUTLS(_s,a_))
 
-~~~
+```
 function MAX-VALUE(state):
   if TERMINAL(state):
     return UTILITY(state)
   v = -∞ (negative infinity)
-  
+
   for action in ACTION(*s*):
     value = MAX(value, MIN-VALUE(RESULTS(*s,a*)))
   return value
-~~~
+```
 
->Optimisation for Minimax : Alpha Beta Pruning
->>When searching for terminal states, if a value is less/more than the previous action's state, then there is no nee to consider the other actions in that state.
+> Optimisation for Minimax : Alpha Beta Pruning
+>
+> > When searching for terminal states, if a value is less/more than the previous action's state, then there is no nee to consider the other actions in that state.
+
 - ![Alpha Beta Pruning](img_Alphabetapruning.png)
