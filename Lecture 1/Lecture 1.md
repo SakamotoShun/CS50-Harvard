@@ -286,4 +286,4 @@ Given state of s
 > > > When searching for terminal states, if a value is less/more than the previous
 > > > action's state,then there is no nee to consider the other actions in that state.
 
-- ![Alpha Beta Pruning](img-Alphabetapruning.png)
+![Alpha Beta Pruning](img-Alphabetapruning.png)
