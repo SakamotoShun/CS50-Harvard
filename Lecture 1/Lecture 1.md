@@ -178,8 +178,6 @@ while True:
 ```
 ___
 ## Informed Search
-
-
 ### Greedy best-first search
 Search Algorithm that expands the  node that is closest to the goal as estimated by a heuristic function. h(n)
 - Manhattan distance
@@ -205,5 +203,58 @@ ___
 
 Search Algorithm trying to win a game whereby there is an "opponent" trying to make it not win
   - *e.g.* Chess, Tic-Tac-Toe
-  - Minimax
-    : Assigning certain endstate with a number and each party tries to achieve the max/min score
+
+#### Minimax
+
+Assigning certain endstate witha a number, and each party tries to achieve the max/min score.
+~~~
+    | o |         o | x | o       x |   |
+-------------   -------------   -------------
+    | o |         o | x | x         | x |
+-------------   -------------   -------------
+    | o |         x | o | x         |   | x
+     (-1)            (0)             (1)
+~~~
+For the O player, trying to acheive the minimum score of -1, where he wins. If not possible, it would have to choose between 0 or 1. Since 0 is smaller, it would choose to end in a draw.
+      
+##### Game
+- S<sub>0</sub>
+  : Inital State
+- PLAYERS(*s*)
+  : return which player to move
+- ACTIONS(*s*)
+  : return legal moves in a state
+- RESULTS(*s*)
+  : returns state after action.
+- TERMINAL(*s*)
+  : check if state is terminal.
+- UTILITY(*s*)
+  : final numerical value of terminal state.
+> Recursive function wil be able to "look into the future" and assign each possible action with the score of the action.
+> If looking for max score, the function will find the end state with the max value.
+- <img src="\Lecture 1\Images\Minimax_TicTacToe.png">
+- <img src="F:\Obsidian\Notes\CS50 Harvard\Lecture 1\Images\Minimax_TicTacToe.png">
+
+___
+
+###### Minimax Psuedocode
+
+Given state of s
+ : - MAX pick action *a* in ACTIONS(*s*) that produces highest value of MIN-VALUE(RESULTS(*s,a*))
+ : - MIN pick action *a* in ACTIONS(*s*) that produces lowest value of MAX-VALUE(RESUTLS(*s,a*))
+
+~~~
+function MAX-VALUE(state):
+  if TERMINAL(state):
+    return UTILITY(state)
+  v = -∞ (negative infinity)
+  
+  for action in ACTION(*s*):
+    value = MAX(value, MIN-VALUE(RESULTS(*s,a*)))
+  return value
+~~~
+
+>Optimisation for Minimax : Alpha Beta Pruning
+>>When searching for terminal states, if a value is less/more than the previous action's state, then there is no nee to consider the other actions in that state.
+- <img src="\Lecture 1\Images\Alphabetapruning.png">
+-  <img src="F:\Obsidian\Notes\CS50 Harvard\Lecture 1\Images\Alphabetapruning.png">
