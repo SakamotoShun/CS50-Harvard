@@ -12,7 +12,7 @@ Maze / Number finding / Driving Directions
 
 - Uniformed Search: Search Strategy that uses no problem specific knowledge
   - [Depth First Search](#stack-frontier) ->[[#Stack Frontier]]
-  - [Breadth First Search](#queue-frontier)
+  - [Breadth First Search](#queue-frontier) ->[[#Queue Frontier]]
   > Algorithms that don't know where it is or where the goal is.
 
 
